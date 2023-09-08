@@ -2,6 +2,7 @@ const express = require("express");
 const routes = express.Router();
 const mongodb = require("mongodb");
 const { ObjectId } = require("mongodb");
+const product = require("../Models/Product.model");
 
 const { MongoClient } = mongodb;
 const uri =
@@ -44,6 +45,35 @@ let db, collection;
         console.error("Error querying MongoDB:", err);
         res.status(500).json({ error: "Internal Server Error" });
       }
+    });
+
+    // routes.post("/", (req, res) => {
+    //   const Product = new product({
+    //     name: req.body.name,
+    //     price: req.body.price,
+    //   });
+    //   Product.save().then(res.send("Product Created"));
+    // });
+
+    routes.post("/newproduct", async (req, res) => {
+      // const newProduct = new product({
+      //   id: req.body.id,
+      //   title: req.body.title,
+      //   price: req.body.price,
+      //   description: req.body.desc,
+      //   category: req.body.category,
+      //   image: req.body.image,
+      //   rating: req.body.rating,
+      // });
+
+      try {
+        const newProduct = new product(req.body);
+        const result = await newProduct.save();
+        res.send(result);
+      } catch (error) {
+        console.log(error);
+      }
+      // newProduct.save().then(res.send("Product Sucessfully Created"));
     });
   } catch (err) {
     console.error("Error connecting to MongoDB:", err);
