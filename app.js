@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
+const ProductRoute = require("./Routes/Products");
 
 mongoose.connect(
   "mongodb+srv://sampleuser:sampleuser123@sample-cluster.7zesgoj.mongodb.net/sample-db"
@@ -9,7 +10,9 @@ mongoose.connect(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const ProductRoute = require("./Routes/Products");
+app.get("/", (req, res) => {
+  res.send("Welcome Home");
+});
 
 app.use("/products", ProductRoute);
 
