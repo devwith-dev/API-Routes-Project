@@ -65,6 +65,8 @@ let db, collection;
       //   image: req.body.image,
       //   rating: req.body.rating,
       // });
+      // newProduct.save().then(res.send("Product Sucessfully Created"));
+
 
       try {
         const newProduct = new product(req.body);
@@ -73,7 +75,7 @@ let db, collection;
       } catch (error) {
         console.log(error);
       }
-      // newProduct.save().then(res.send("Product Sucessfully Created"));
+
     });
   } catch (err) {
     console.error("Error connecting to MongoDB:", err);
