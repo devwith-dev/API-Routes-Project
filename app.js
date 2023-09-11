@@ -3,8 +3,6 @@ const mongoose = require("mongoose");
 const app = express();
 const ProductRoute = require("./Routes/Products");
 
-app.set("view engine", "ejs");
-app.use(express.static("public"));
 
 mongoose.connect(
   "mongodb+srv://sampleuser:sampleuser123@sample-cluster.7zesgoj.mongodb.net/sample-db"
@@ -14,7 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  res.render("Home");
+  res.send("Welcome to my custom ecommerce api project");
 });
 
 app.use("/products", ProductRoute);
